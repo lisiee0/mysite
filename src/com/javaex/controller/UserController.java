@@ -41,6 +41,13 @@ public class UserController extends HttpServlet {
 			
 			UserVo vo= new UserVo(id, password, name, gender);
 			ud.userInsert(vo);
+			
+			WebUtil.forward(request, response, "/WEB-INF/views/user/joinOk.jsp");
+		}
+		else if("loginForm".equals(act)) {
+			System.out.println("user/loginform");
+			
+			WebUtil.forward(request, response, "/WEB-INF/views/user/loginForm.jsp");
 		}
 		
 	}
