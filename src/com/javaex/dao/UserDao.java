@@ -51,8 +51,7 @@ public class UserDao {
 	
 	
 	// 회원가입
-	public int userInsert(UserVo vo) {
-		int count= 0;
+	public void userInsert(UserVo vo) {
 		
 		this.getConnection();
 		
@@ -69,7 +68,7 @@ public class UserDao {
 		    pstmt.setString(4, vo.getGender()); // gender
 		    
 
-		    count= pstmt.executeUpdate();	    
+		   int count= pstmt.executeUpdate();	    
 		    		   	    
 		    System.out.println("["+count+"건 등록되었습니다.]");
 		        	    
@@ -77,7 +76,5 @@ public class UserDao {
 		    System.out.println("error:" + e);
 		} 
 		this.close();
-		
-		return count;
 	}
 }

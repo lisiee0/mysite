@@ -1,13 +1,16 @@
 package com.javaex.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.javaex.dao.UserDao;
 import com.javaex.util.WebUtil;
+import com.javaex.vo.UserVo;
 
 
 @WebServlet("/user")
@@ -19,9 +22,25 @@ public class UserController extends HttpServlet {
 		
 		String act= request.getParameter("action");
 		
-		if ("join".equals(act)) {
+		// 회원가입 폼
+		if ("joinForm".equals(act)) {
 			System.out.println("user/joinForm");
 			WebUtil.forward(request, response, "/WEB-INF/views/user/joinForm.jsp");
+		}
+		
+		// 회원가입(insert)
+		else if("join".equals(act)) {
+			System.out.println("user/join");
+			
+			UserDao ud= new UserDao();
+			
+			String id= request.getParameter("id");
+			String password= request.getParameter("password");
+			String name= request.getParameter("name");
+			String gender= request.getParameter("gender");
+			
+			UserVo vo= new UserVo(id, password, name, gender);
+			ud.userInsert(vo);
 		}
 		
 	}
