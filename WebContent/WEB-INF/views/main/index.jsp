@@ -6,7 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/mysite/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="mysite/assets/css/main.css" rel="stylesheet" type="text/css">
+
 </head>
+
 <body>
 	<div id="wrap">
 
@@ -48,7 +52,7 @@
 				<!-- content-head 없음 -->
 				<div id="index"> 
 				
-					<img id="profile-img" src="../../assets/image/profile.jpg">
+					<img id="profile-img" src="/mysite/assets/image/profile.jpg">
 					
 					<div id="greetings">
 						<p class="text-xlarge">
@@ -91,6 +95,7 @@
 
 	</div>
 	<!-- //wrap -->
-	
+
 </body>
+
 </html>
