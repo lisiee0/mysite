@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/mysite/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="mysite/assets/css/main.css" rel="stylesheet" type="text/css">
+<link href="/mysite/assets/css/main.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -28,7 +28,7 @@
 			-->	
 			<ul>
 				<li><a href="" class="btn_s">로그인</a></li>
-				<li><a href="" class="btn_s">회원가입</a></li>
+				<li><a href="/mysite/user?action=join" class="btn_s">회원가입</a></li>
 			</ul>
 			
 		</div>
