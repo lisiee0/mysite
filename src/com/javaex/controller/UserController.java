@@ -62,17 +62,17 @@ public class UserController extends HttpServlet {
 			String id= request.getParameter("id");
 			String password= request.getParameter("password");
 			
-			UserVo authVo= ud.getUseer(id, password);
+			UserVo authVo= ud.getUser(id, password);
 
 			if(authVo==null) {
 				System.out.println("로그인실패");
 				
-				WebUtil.redirect(request, response, "/mysite/user?action=loginForm");
+				WebUtil.redirect(request, response, "/mysite/user?action=loginForm&result=fail");
 			}
 			else {
 				System.out.println("로그인성공");
 				
-				// 세션 생성& authVo 세션에 넣기
+				// 세션 생성 & authVo 세션에 넣기
 				HttpSession session= request.getSession();
 				session.setAttribute("authUser", authVo);
 				
@@ -80,6 +80,59 @@ public class UserController extends HttpServlet {
 			}
 		}
 		
+		// 로그아웃
+		else if("logout".equals(act)) {
+			System.out.println("user/logout");
+			
+			// 기존 세션이 존재하면 기존 세션 리턴
+			HttpSession session= request.getSession();
+			session.removeAttribute("authUser"); // 세션에서 객체(authUser) 삭제
+			session.invalidate(); // 세션 삭제
+			
+			WebUtil.redirect(request, response, "/mysite/main");
+		}
+		
+		
+		// 회원정보수정 폼
+		else if("modifyForm".equals(act)) {
+			System.out.println("user/modifyForm");
+			
+			WebUtil.forward(request, response, "/WEB-INF/views/user/modifyForm.jsp");
+		}
+		// 회원정보수정
+		else if("modify".equals(act)) {
+			System.out.println("user/modify");
+		
+			UserDao ud= new UserDao();
+			
+			// 기존 세션 불러오기
+			HttpSession session= request.getSession();
+			UserVo authUser= (UserVo)session.getAttribute("authUser");
+			
+			int no= Integer.parseInt(request.getParameter("no"));
+			String password= request.getParameter("password");
+				if("".equals(password)) {
+					password= password.replace("", authUser.getPassword());
+				}
+			String name= request.getParameter("name");
+				if("".equals(name)) {
+					name= name.replace("", authUser.getName());
+				}
+			String gender= request.getParameter("gender");
+				if(gender==null) {
+					gender= authUser.getGender();
+				}
+			
+			// 회원정보 수정 (db)
+			UserVo vo= new UserVo(no, password, name, gender);
+			ud.userUpdate(vo);
+			
+			// 세션 authUser 수정
+			authUser=ud.getUser(authUser.getId(), password);
+			session.setAttribute("authUser", authUser);
+			
+			WebUtil.redirect(request, response, "/mysite/main");
+		}	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

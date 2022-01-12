@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.javaex.vo.GuestbookVo;
 import com.javaex.vo.UserVo;
 
 public class UserDao {
@@ -79,7 +78,7 @@ public class UserDao {
 		close();
 	}
 	
-	public UserVo getUseer(String uid, String pw) {
+	public UserVo getUser(String uid, String pw) {
 		UserVo vo= null;
 		
 		getConnection();
@@ -118,5 +117,35 @@ public class UserDao {
 		close();
 
 		return vo;
+	}
+	
+	// 회원정보수정
+	public void userUpdate(UserVo vo) {
+		
+		getConnection();
+
+		try {
+			String query= "";
+			query += " update 	users ";
+			query += " set 		password= ?, ";
+			query += " 	   		name= ?, ";
+			query += " 	   		gender= ? ";
+			query += " where	no= ? ";
+			
+		    pstmt= conn.prepareStatement(query);
+		    
+		    pstmt.setString(1, vo.getPassword());
+		    pstmt.setString(2, vo.getName());
+		    pstmt.setString(3, vo.getGender());
+		    pstmt.setInt(4, vo.getNo());
+		    
+		    int count= pstmt.executeUpdate();
+		    
+		    System.out.println("["+count+"건 수정되었습니다.]");
+		    
+		} catch (SQLException e) {
+		    System.out.println("error:" + e);
+		} 
+		close();
 	}
 }

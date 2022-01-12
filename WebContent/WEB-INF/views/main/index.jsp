@@ -22,7 +22,7 @@
 
 		<div id="header" class="clearfix">
 			<h1>
-				<a href="">MySite</a>
+				<a href="/mysite/main">MySite</a>
 			</h1>
 			
 			<%
@@ -30,8 +30,8 @@
 			%>
 			<ul>
 				<li><%=authUser.getName()%> 님 안녕하세요^^</li>
-				<li><a href="" class="btn_s">로그아웃</a></li>
-				<li><a href="" class="btn_s">회원정보수정</a></li>
+				<li><a href="/mysite/user?action=logout" class="btn_s">로그아웃</a></li>
+				<li><a href="/mysite/user?action=modifyForm" class="btn_s">회원정보수정</a></li>
 			</ul>
 			<%
 			}

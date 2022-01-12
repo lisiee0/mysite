@@ -4,8 +4,9 @@
 
 <%
 	UserVo authUser= (UserVo)session.getAttribute("authUser");
-	String result= request.getParameter("result");
+	int no= authUser.getNo();
 %>
+
 
 <!DOCTYPE html>
 <html>
@@ -16,6 +17,7 @@
 <link href="/mysite/assets/css/user.css" rel="stylesheet" type="text/css">
 
 </head>
+
 <body>
 	<div id="wrap">
 
@@ -30,7 +32,7 @@
 			<ul>
 				<li><%=authUser.getName()%> 님 안녕하세요^^</li>
 				<li><a href="/mysite/user?action=logout" class="btn_s">로그아웃</a></li>
-				<li><a href="" class="btn_s">회원정보수정</a></li>
+				<li><a href="/mysite/user?action=modifyForm" class="btn_s">회원정보수정</a></li>
 			</ul>
 			<%
 			}
@@ -40,7 +42,6 @@
 				<li><a href="/mysite/user?action=loginForm" class="btn_s">로그인</a></li>
 				<li><a href="/mysite/user?action=joinForm" class="btn_s">회원가입</a></li>
 			</ul>
-			
 			<% 
 			}
 			%>
@@ -72,12 +73,12 @@
 			<div id="content">
 			
 				<div id="content-head">
-					<h3>로그인</h3>
+					<h3>회원정보</h3>
 					<div id="location">
 						<ul>
 							<li>홈</li>
 							<li>회원</li>
-							<li class="last">로그인</li>
+							<li class="last">회원정보</li>
 						</ul>
 					</div>
 					<div class="clear"></div>
@@ -85,43 +86,57 @@
 				 <!-- //content-head -->
 	
 				<div id="user">
-					<div id="loginForm">
+					<div id="modifyForm">
 						<form action="/mysite/user" method="get">
 	
 							<!-- 아이디 -->
 							<div class="form-group">
 								<label class="form-text" for="input-uid">아이디</label> 
-								<input type="text" id="input-uid" name="id" value="" placeholder="아이디를 입력하세요">
+								<span class="text-large bold"><%=authUser.getId()%></span>
 							</div>
 	
 							<!-- 비밀번호 -->
 							<div class="form-group">
-								<label class="form-text" for="input-pass">비밀번호</label> 
-								<input type="text" id="input-pass" name="password" value="" placeholder="비밀번호를 입력하세요"	>
-							</div>
-							
-							<%
-							if("fail".equals(result)) {
-							%>
-							<p>로그인에 실패했습니다. 다시 로그인 해주세요.</p>
-							<%
-							}
-							%>
-							
-							<!-- 버튼영역 -->
-							<div class="button-area">
-								<input type="hidden" name="action" value="login">
-								<button type="submit" id="btn-submit">로그인</button>
+								<label class="form-text" for="input-pass">패스워드</label> 
+								<input type="text" id="input-pass" name="password" value="" placeholder="<%=authUser.getPassword()%>"	>
 							</div>
 	
+							<!-- 이름 -->
+							<div class="form-group">
+								<label class="form-text" for="input-name">이름</label> 
+								<input type="text" id="input-name" name="name" value="" placeholder="<%=authUser.getName()%>">
+							</div>
+	
+							<!-- 성별 -->
+							<div class="form-group">
+								<span class="form-text">성별</span> 
+								
+								<label for="rdo-male">남</label> 
+								<input type="radio" id="rdo-male" name="gender" value="male" > 
+								
+								<label for="rdo-female">여</label> 
+								<input type="radio" id="rdo-female" name="gender" value="female" > 
+	
+							</div>
+	
+							<!-- 버튼영역 -->
+							<div class="button-area">
+								<input type="hidden" name="action" value="modify">
+								<button type="submit" id="btn-submit">회원정보수정</button>
+							</div>
+							
+							<!-- 회원 no값 히든처리 -->
+							<input type="hidden" name="no" value=<%=no%>>
 						</form>
+					
+					
 					</div>
-					<!-- //loginForm -->
+					<!-- //modifyForm -->
 				</div>
 				<!-- //user -->
 			</div>
 			<!-- //content  -->
-			
+
 		</div>
 		<!-- //container  -->
 
@@ -129,7 +144,7 @@
 			Copyright ⓒ 2020 황일영. All right reserved
 		</div>
 		<!-- //footer -->
-
+		
 	</div>
 	<!-- //wrap -->
 
