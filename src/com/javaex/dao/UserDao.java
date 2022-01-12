@@ -128,8 +128,8 @@ public class UserDao {
 			String query= "";
 			query += " update 	users ";
 			query += " set 		password= ?, ";
-			query += " 	   		name= ?, ";
-			query += " 	   		gender= ? ";
+			query += " 			name= ?, ";
+			query += " 			gender= ? ";
 			query += " where	no= ? ";
 
 			pstmt= conn.prepareStatement(query);
