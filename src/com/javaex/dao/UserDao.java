@@ -126,8 +126,8 @@ public class UserDao {
 
 		try {
 			String query= "";
-			query += " update 	users ";
-			query += " set 		password= ?, ";
+			query += " update	users ";
+			query += " set		password= ?, ";
 			query += " 			name= ?, ";
 			query += " 			gender= ? ";
 			query += " where	no= ? ";
