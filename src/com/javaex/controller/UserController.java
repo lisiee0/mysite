@@ -63,10 +63,7 @@ public class UserController extends HttpServlet {
 			String password= request.getParameter("password");
 			
 			UserVo authVo= ud.getUseer(id, password);
-			
-			
 
-			
 			if(authVo==null) {
 				System.out.println("로그인실패");
 				
