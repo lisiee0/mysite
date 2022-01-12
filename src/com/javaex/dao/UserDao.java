@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.javaex.vo.GuestbookVo;
 import com.javaex.vo.UserVo;
 
 public class UserDao {
@@ -53,7 +54,7 @@ public class UserDao {
 	// 회원가입
 	public void userInsert(UserVo vo) {
 		
-		this.getConnection();
+		getConnection();
 		
 		try {
 			String query= "";
@@ -75,6 +76,47 @@ public class UserDao {
 		} catch (SQLException e) {
 		    System.out.println("error:" + e);
 		} 
-		this.close();
+		close();
+	}
+	
+	public UserVo getUseer(String uid, String pw) {
+		UserVo vo= null;
+		
+		getConnection();
+		
+		try {
+			String query= "";
+			query += " select   no, "; 
+			query += "          id, ";
+			query += "          password, ";
+			query += "          name, ";
+			query += "          gender ";
+			query += " from     users ";
+			query += " where    id= ? ";
+			query += " and      password= ? ";
+
+			pstmt= conn.prepareStatement(query);
+			
+			pstmt.setString(1, uid);
+			pstmt.setString(2, pw);
+			
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {           
+            	int no= rs.getInt("no"); 
+            	String id= rs.getString("id");
+            	String password= rs.getString("password");
+            	String name= rs.getString("name");
+            	String gender= rs.getString("gender");
+            	
+            	vo= new UserVo(no, id, password, name, gender);
+            }
+
+		} catch (SQLException e) {
+		    System.out.println("error:" + e);
+		}	
+		close();
+
+		return vo;
 	}
 }
