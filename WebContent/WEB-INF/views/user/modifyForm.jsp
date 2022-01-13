@@ -106,18 +106,40 @@
 								<label class="form-text" for="input-name">이름</label> 
 								<input type="text" id="input-name" name="name" value="" placeholder="<%=authUser.getName()%>">
 							</div>
-	
+							
+							
 							<!-- 성별 -->
-							<div class="form-group">
-								<span class="form-text">성별</span> 
-								
-								<label for="rdo-male">남</label> 
-								<input type="radio" id="rdo-male" name="gender" value="male" > 
-								
-								<label for="rdo-female">여</label> 
-								<input type="radio" id="rdo-female" name="gender" value="female" > 
+							<%
+							if("female".equals(authUser.getGender())) {
+							%>
+								<div class="form-group">
+									<span class="form-text">성별</span> 
+									
+									<label for="rdo-male">남</label> 
+									<input type="radio" id="rdo-male" name="gender" value="male" > 
+									
+									<label for="rdo-female">여</label> 
+									<input type="radio" id="rdo-female" name="gender" value="female" checked="checked" > 
 	
-							</div>
+								</div>
+							<%	
+							} 
+							else {
+							%>						
+								<div class="form-group">
+									<span class="form-text">성별</span> 
+									
+									<label for="rdo-male">남</label> 
+									<input type="radio" id="rdo-male" name="gender" value="male" checked="checked" > 
+									
+									<label for="rdo-female">여</label> 
+									<input type="radio" id="rdo-female" name="gender" value="female" > 
+		
+								</div>
+							<%	
+							}
+							%>
+
 	
 							<!-- 버튼영역 -->
 							<div class="button-area">

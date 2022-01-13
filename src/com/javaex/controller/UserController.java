@@ -118,10 +118,7 @@ public class UserController extends HttpServlet {
 				if("".equals(name)) {
 					name= name.replace("", authUser.getName());
 				}
-			String gender= request.getParameter("gender");
-				if(gender==null) {
-					gender= authUser.getGender();
-				}
+			String gender= request.getParameter("gender");	
 			
 			// 회원정보 수정 (db)
 			UserVo vo= new UserVo(no, password, name, gender);
