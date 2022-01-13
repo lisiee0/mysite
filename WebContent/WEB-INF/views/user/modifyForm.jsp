@@ -120,7 +120,6 @@
 								
 								<label for="rdo-female">여</label> 
 								<input type="radio" id="rdo-female" name="gender" value="female" checked="checked" > 
-
 							</div>
 							<%	
 							} 
@@ -133,8 +132,7 @@
 								<input type="radio" id="rdo-male" name="gender" value="male" checked="checked" > 
 								
 								<label for="rdo-female">여</label> 
-								<input type="radio" id="rdo-female" name="gender" value="female" > 
-	
+								<input type="radio" id="rdo-female" name="gender" value="female" >
 							</div>
 							<%	
 							}
