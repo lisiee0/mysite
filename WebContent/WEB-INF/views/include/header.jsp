@@ -1,36 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ page import="com.javaex.vo.UserVo" %>
-
-<%
-	UserVo authUser= (UserVo)session.getAttribute("authUser");
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div id="header" class="clearfix">
 	<h1>
 		<a href="/mysite/main">MySite</a>
 	</h1>
 	
-	<%
-	if(authUser!=null) { // authUser이 null이 아닐때 --> session에 값이 있을때 (로그인성공일때)
-	%>
-	<ul>
-		<li><%=authUser.getName()%> 님 안녕하세요^^</li>
-		<li><a href="/mysite/user?action=logout" class="btn_s">로그아웃</a></li>
-		<li><a href="/mysite/user?action=modifyForm" class="btn_s">회원정보수정</a></li>
-	</ul>
-	<%
-	}
-	else { // 로그인 전, (로그인실패일때)
-	%>
-	<ul>
-		<li><a href="/mysite/user?action=loginForm" class="btn_s">로그인</a></li>
-		<li><a href="/mysite/user?action=joinForm" class="btn_s">회원가입</a></li>
-	</ul>
-	<% 
-	}
-	%>	
-
+	<c:choose>
+		<c:when test="${sessionScope.authUser ne null}">
+			<ul>
+				<li>${sessionScope.authUser.name} 님 안녕하세요^^</li>
+				<li><a href="/mysite/user?action=logout" class="btn_s">로그아웃</a></li>
+				<li><a href="/mysite/user?action=modifyForm" class="btn_s">회원정보수정</a></li>
+			</ul>
+		</c:when>
+	
+		<c:otherwise>
+			<ul>
+				<li><a href="/mysite/user?action=loginForm" class="btn_s">로그인</a></li>
+				<li><a href="/mysite/user?action=joinForm" class="btn_s">회원가입</a></li>
+			</ul>
+		</c:otherwise>	
+	</c:choose>
 </div>
 	
 <div id="nav">
