@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ page import="com.javaex.vo.UserVo" %>
-
-<%
-	UserVo authUser= (UserVo)session.getAttribute("authUser");
-	int no= authUser.getNo();
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
 <!DOCTYPE html>
@@ -56,53 +50,48 @@
 							<!-- 아이디 -->
 							<div class="form-group">
 								<label class="form-text" for="input-uid">아이디</label> 
-								<span class="text-large bold"><%=authUser.getId()%></span>
+								<span class="text-large bold">${authUser.id}</span>
 							</div>
 	
 							<!-- 비밀번호 -->
 							<div class="form-group">
 								<label class="form-text" for="input-pass">패스워드</label> 
-								<input type="text" id="input-pass" name="password" value="" placeholder="<%=authUser.getPassword()%>"	>
+								<input type="text" id="input-pass" name="password" value="" placeholder="${authUser.password}"	>
 							</div>
 	
 							<!-- 이름 -->
 							<div class="form-group">
 								<label class="form-text" for="input-name">이름</label> 
-								<input type="text" id="input-name" name="name" value="" placeholder="<%=authUser.getName()%>">
+								<input type="text" id="input-name" name="name" value="" placeholder="${authUser.name}">
 							</div>
 							
 							
 							<!-- 성별 -->
-							<%
-							if("female".equals(authUser.getGender())) {
-							%>
-							<div class="form-group">
-								<span class="form-text">성별</span> 
-								
-								<label for="rdo-male">남</label> 
-								<input type="radio" id="rdo-male" name="gender" value="male" > 
-								
-								<label for="rdo-female">여</label> 
-								<input type="radio" id="rdo-female" name="gender" value="female" checked="checked" > 
-							</div>
-							<%	
-							} 
-							else {
-							%>						
-							<div class="form-group">
-								<span class="form-text">성별</span> 
-								
-								<label for="rdo-male">남</label> 
-								<input type="radio" id="rdo-male" name="gender" value="male" checked="checked" > 
-								
-								<label for="rdo-female">여</label> 
-								<input type="radio" id="rdo-female" name="gender" value="female" >
-							</div>
-							<%	
-							}
-							%>
+							<c:choose>
+								<c:when test="${authUser.gender eq 'female'}">
+									<div class="form-group">
+										<span class="form-text">성별</span> 
+										
+										<label for="rdo-male">남</label> 
+										<input type="radio" id="rdo-male" name="gender" value="male" > 
+										
+										<label for="rdo-female">여</label> 
+										<input type="radio" id="rdo-female" name="gender" value="female" checked="checked" > 
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div class="form-group">
+										<span class="form-text">성별</span> 
+										
+										<label for="rdo-male">남</label> 
+										<input type="radio" id="rdo-male" name="gender" value="male" checked="checked" > 
+										
+										<label for="rdo-female">여</label> 
+										<input type="radio" id="rdo-female" name="gender" value="female" >
+									</div>
+								</c:otherwise>
+							</c:choose>
 
-	
 							<!-- 버튼영역 -->
 							<div class="button-area">
 								<input type="hidden" name="action" value="modify">
@@ -110,7 +99,7 @@
 							</div>
 							
 							<!-- 회원 no값 히든처리 -->
-							<input type="hidden" name="no" value=<%=no%>>
+							<input type="hidden" name="no" value="${authUser.no}">
 						</form>
 					
 					
