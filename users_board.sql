@@ -52,6 +52,12 @@ values(seq_users_no.nextval, 'abc', '1111', '유재석', 'male');
 insert into users
 values(seq_users_no.nextval, 'qwer', '1234', '이효리', 'female');
 
+insert into board
+values(seq_board_no.nextval, '첫번째 게시글', '첫번째', 0, sysdate, 1);
+
+insert into board
+values(seq_board_no.nextval, '두번째 게시글', '두번째', 0, sysdate, 2);
+
 commit;
 
 select * from users;
