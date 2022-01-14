@@ -23,22 +23,22 @@ nocache;
 
 -- users 테이블 생성
 create table users(
-    bno             number(5),
+    no              number(5),
     id              varchar2(20) unique not null,
     password        varchar2(20) not null,
     name            varchar2(20),
     gender          varchar2(10),
-    primary key(bno));  
+    primary key(no));  
 
 -- board 테이블 생성
 create table board(
-    bno             number(5),
+    no              number(5),
     title           varchar2(500) not null,
     content         varchar2(4000),
     hit             number(5),
     reg_date        date not null,
     user_no         number not null,
-    primary key(bno),
+    primary key(no),
     constraint board_fk foreign key(user_no)
     references users(no)); 
 
