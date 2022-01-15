@@ -60,7 +60,7 @@ values(seq_board_no.nextval, '두번째 게시글', '두번째', 0, sysdate, 2);
 
 commit;
 
-select * from users;
+select * from susers;
 select * from board;
 
 
@@ -86,3 +86,12 @@ select   b.no no,
 from     users u, board b 
 where    u.no= b.user_no 
 and		b.no= 1;
+
+insert into board
+values(seq_board_no.nextval, '두번째 게시글', '두번째', 0, sysdate, 2);
+
+
+
+
+insert into board
+values(seq_board_no.nextval, '123', '123', 0, sysdate, 2);

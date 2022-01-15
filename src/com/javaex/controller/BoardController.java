@@ -59,7 +59,7 @@ public class BoardController extends HttpServlet {
 				}
 			String content= request.getParameter("content");
 				if("".equals(content)) {
-				content= content.replace("", vo.getTitle());
+					content= content.replace("", vo.getTitle());
 				}
 				
 			vo= new BoardVo(no, title, content);
