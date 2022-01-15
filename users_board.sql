@@ -68,3 +68,21 @@ select *
 from users u, board b
 where u.no= b.user_no
 order by reg_date desc;
+
+
+update   board
+set      hit= hit+1
+where    no= 1; 
+
+
+
+select   b.no no, 
+          title, 
+          content, 
+          hit,
+          to_char(reg_date, 'YYYY-MM-DD HH:MI:SS') regDate, 
+          user_no, 
+          u.name username 
+from     users u, board b 
+where    u.no= b.user_no 
+and		b.no= 1;

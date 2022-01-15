@@ -45,7 +45,7 @@
 	
 				<div id="board">
 					<div id="list">
-						<form action="" method="">
+						<form action="/mysite/board" method="get">
 							<div class="form-group text-right">
 								<input type="text">
 								<button type="submit" id=btn_search>검색</button>
@@ -62,48 +62,22 @@
 									<th>관리</th>
 								</tr>
 							</thead>
+							
+							
 							<tbody>
+								<c:forEach items="${requestScope.bl}" var="bl">
 								<tr>
-									<td>123</td>
-									<td class="text-left"><a href="#">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
+									<td>${bl.no}</td>
+									<td class="text-left"><a href="/mysite/board?action=read&no=${bl.no}">${bl.title}</a></td>
+									<td>${bl.userName}</td>
+									<td>${bl.hit}</td>
+									<td>${bl.regDate}</td>
 									<td><a href="">[삭제]</a></td>
 								</tr>
-								<tr>
-									<td>123</td>
-									<td class="text-left"><a href="#">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<td><a href="">[삭제]</a></td>
-								</tr>
-								<tr>
-									<td>123</td>
-									<td class="text-left"><a href="#">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<td><a href="">[삭제]</a></td>
-								</tr>
-								<tr>
-									<td>123</td>
-									<td class="text-left"><a href="#">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<td><a href="">[삭제]</a></td>
-								</tr>
-								<tr class="last">
-									<td>123</td>
-									<td class="text-left"><a href="#">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<td><a href="">[삭제]</a></td>
-								</tr>
+								</c:forEach>
 							</tbody>
+							
+							
 						</table>
 			
 						<div id="paging">

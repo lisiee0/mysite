@@ -1,10 +1,13 @@
 package com.javaex.dao;
 
-import com.javaex.vo.UserVo;
+import java.util.List;
+
+import com.javaex.vo.BoardVo;
 
 public class TestDao {
 
 	public static void main(String[] args) {
+		
 		/*
 		UserVo vo= new UserVo("ccc", "1111", "강호동", "male");
 		
@@ -14,6 +17,14 @@ public class TestDao {
 		ud.userInsert(vo);
 		*/
 
-
+		BoardDao bd= new BoardDao();
+		
+		// 리스트 불러오기 
+		List<BoardVo> vo= bd.getList();
+		for(BoardVo bv: vo) {
+			System.out.println(bv.toString());
+		}
+		
+		
 	}
 }

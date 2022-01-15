@@ -5,21 +5,27 @@ public class BoardVo {
 	private int no;
 	private String title;
 	private String content;
-	private int count;
+	private int hit;
 	private String regDate;
-	private int userNo;
+	private String userName;
 	
 	public BoardVo() {
 		
 	}
-	
-	public BoardVo(int no, String title, String content, int count, String regDate, int userNo) {
+
+	public BoardVo(int no, String title, String content) {
 		this.no = no;
 		this.title = title;
 		this.content = content;
-		this.count = count;
+	}
+
+	public BoardVo(int no, String title, String content, int hit, String regDate, String userName) {
+		this.no = no;
+		this.title = title;
+		this.content = content;
+		this.hit = hit;
 		this.regDate = regDate;
-		this.userNo = userNo;
+		this.userName = userName;
 	}
 
 	
@@ -47,12 +53,12 @@ public class BoardVo {
 		this.content = content;
 	}
 
-	public int getCount() {
-		return count;
+	public int gethit() {
+		return hit;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
+	public void sethit(int hit) {
+		this.hit = hit;
 	}
 
 	public String getRegDate() {
@@ -63,17 +69,17 @@ public class BoardVo {
 		this.regDate = regDate;
 	}
 
-	public int getUserNo() {
-		return userNo;
+	public String getuserName() {
+		return userName;
 	}
 
-	public void setUserNo(int userNo) {
-		this.userNo = userNo;
+	public void setuserName(String userName) {
+		this.userName = userName;
 	}
 
 	@Override
 	public String toString() {
-		return "BoardVo [no=" + no + ", title=" + title + ", content=" + content + ", count=" + count + ", regDate="
-				+ regDate + ", userNo=" + userNo + "]";
+		return "BoardVo [no=" + no + ", title=" + title + ", content=" + content + ", hit=" + hit + ", regDate="
+				+ regDate + ", userName=" + userName + "]";
 	}
 }

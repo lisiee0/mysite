@@ -55,7 +55,7 @@ public class GuestbookDao {
 	public List<GuestbookVo> getList() {
 		List<GuestbookVo> gbList= new ArrayList<GuestbookVo>();
 		
-		this.getConnection();
+		getConnection();
 		
 		try {
 			String query= "";
@@ -87,14 +87,14 @@ public class GuestbookDao {
 		    System.out.println("error:" + e);
 		} 
 
-		this.close();
+		close();
 		
 		return gbList;
 	}
 	
 	
 	public void guestDelete(int no) {
-		this.getConnection();
+		getConnection();
 
 		try {
 			String query= "";
@@ -112,13 +112,13 @@ public class GuestbookDao {
 		} catch (SQLException e) {
 		    System.out.println("error:" + e);
 		}
-		this.close();
+		close();
 	}
 	
 
 	public void guestInsert(GuestbookVo vo) {
 		
-		this.getConnection();
+		getConnection();
 
 		try {
 			String query= "";
@@ -138,14 +138,14 @@ public class GuestbookDao {
 		} catch (SQLException e) {
 		    System.out.println("error:" + e);
 		} 
-		this.close();
+		close();
 	}
 	
 	
 	public GuestbookVo getGuest(int num) {
 		GuestbookVo vo= null;
 		
-		this.getConnection();
+		getConnection();
 		
 		try {
 			String query= "";
@@ -176,7 +176,7 @@ public class GuestbookDao {
 		} catch (SQLException e) {
 		    System.out.println("error:" + e);
 		}	
-		this.close();
+		close();
 
 		return vo;
 	}
