@@ -49,35 +49,37 @@
 							<!-- 작성자 -->
 							<div class="form-group">
 								<span class="form-text">작성자</span>
-								<span class="form-value">${requestScope.po.userName}</span>
+								<span class="form-value">${po.userName}</span>
 							</div>
 							
 							<!-- 조회수 -->
 							<div class="form-group">
 								<span class="form-text">조회수</span>
-								<span class="form-value">${requestScope.po.hit}</span>
+								<span class="form-value">${po.hit}</span>
 							</div>
 							
 							<!-- 작성일 -->
 							<div class="form-group">
 								<span class="form-text">작성일</span>
-								<span class="form-value">${requestScope.po.regDate}</span>
+								<span class="form-value">${po.regDate}</span>
 							</div>
 							
 							<!-- 제목 -->
 							<div class="form-group">
 								<span class="form-text">제 목</span>
-								<span class="form-value">${requestScope.po.title}</span>
+								<span class="form-value">${po.title}</span>
 							</div>
 						
 							<!-- 내용 -->
 							<div id="txt-content">
 								<span class="form-value" >
-									${requestScope.po.content}
+									${po.content}
 								</span>
 							</div>
 							
-							<a id="btn_modify" href="/mysite/board?action=modifyForm&no=${requestScope.po.no}">수정</a>
+							<c:if test="${po.userNo eq authUser.no}">
+								<a id="btn_modify" href="/mysite/board?action=modifyForm&no=${po.no}">수정</a>
+							</c:if>
 							<a id="btn_modify" href="/mysite/board?action=list">목록</a>
 							
 						</form>

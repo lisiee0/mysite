@@ -25,6 +25,12 @@ public class TestDao {
 			System.out.println(bv.toString());
 		}
 		
+		String title= "asd";
+		String content= "qwe";
+		int userNo= 2;
+		
+		bd.write(title, content, userNo);
+		
 		
 	}
 }

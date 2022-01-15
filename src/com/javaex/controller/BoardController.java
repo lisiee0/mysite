@@ -20,19 +20,8 @@ public class BoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String act= request.getParameter("action");
 		
-		// 게시판 리스트
-		if("list".equals(act)) {
-			
-			BoardDao bd= new BoardDao();
-			List<BoardVo> bList= bd.getList();
-			
-			request.setAttribute("bl", bList);
-			
-			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
-		}
-		
 		// 읽기
-		else if("read".equals(act)) {
+		if("read".equals(act)) {
 			int no= Integer.parseInt(request.getParameter("no"));
 			
 			BoardDao bd= new BoardDao();
@@ -56,24 +45,68 @@ public class BoardController extends HttpServlet {
 			WebUtil.forward(request, response, "/WEB-INF/views/board/modifyForm.jsp");
 		}
 		
-		// 수정
+		// 게시글 수정
 		else if("modify".equals(act)) {
 			int no= Integer.parseInt(request.getParameter("no"));
+			
+			BoardDao bd= new BoardDao();
+			BoardVo vo= bd.getPost(no);
+			
+			// 공백으로 수정하면 기존값으로 업데이트
+			String title= request.getParameter("title");
+				if("".equals(title)) {
+					title= title.replace("", vo.getTitle());
+				}
+			String content= request.getParameter("content");
+				if("".equals(content)) {
+				content= content.replace("", vo.getTitle());
+				}
+				
+			vo= new BoardVo(no, title, content);
+			
+			bd.modify(vo);
+			
+			WebUtil.redirect(request, response, "/mysite/board");
+		}
+		
+		// 글쓰기폼
+		else if("writeForm".equals(act)) {			
+			WebUtil.forward(request, response, "/WEB-INF/views/board/writeForm.jsp");
+		}
+		
+		else if("write".equals(act)) {
+			int userNo= Integer.parseInt(request.getParameter("userNo"));
 			String title= request.getParameter("title");
 			String content= request.getParameter("content");
 			
 			BoardDao bd= new BoardDao();
-			BoardVo vo= new BoardVo(no, title, content);
+			bd.write(title, content, userNo);
 			
-			bd.modify(vo);
-			
-			WebUtil.redirect(request, response, "/mysite/board?action=list");
+			WebUtil.redirect(request, response, "/mysite/board");	
 		}
-
+		
+		// 게시글 삭제
+		else if("delete".equals(act)) {
+			int no= Integer.parseInt(request.getParameter("no"));
+			
+			BoardDao bd= new BoardDao();
+			bd.delete(no);
+			
+			WebUtil.redirect(request, response, "/mysite/board");
+		}
+		
+		// 게시글 리스트
+		else {
+			BoardDao bd= new BoardDao();
+			List<BoardVo> bList= bd.getList();
+			
+			request.setAttribute("bl", bList);
+			
+			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");			
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

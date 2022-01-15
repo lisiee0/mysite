@@ -8,6 +8,7 @@ public class BoardVo {
 	private int hit;
 	private String regDate;
 	private String userName;
+	private int userNo;
 	
 	public BoardVo() {
 		
@@ -19,13 +20,14 @@ public class BoardVo {
 		this.content = content;
 	}
 
-	public BoardVo(int no, String title, String content, int hit, String regDate, String userName) {
+	public BoardVo(int no, String title, String content, int hit, String regDate, String userName, int userNo) {
 		this.no = no;
 		this.title = title;
 		this.content = content;
 		this.hit = hit;
 		this.regDate = regDate;
 		this.userName = userName;
+		this.userNo = userNo;
 	}
 
 	
@@ -75,6 +77,14 @@ public class BoardVo {
 
 	public void setuserName(String userName) {
 		this.userName = userName;
+	}
+	
+	public int getUserNo() {
+		return userNo;
+	}
+
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 
 	@Override

@@ -81,8 +81,9 @@ public class BoardDao {
 				int hit= rs.getInt("hit");
 				String regDate= rs.getString("regDate");
 				String userName= rs.getString("username");
+				int userNo= rs.getInt("user_no");
 				
-				BoardVo vo= new BoardVo(no, title, content, hit, regDate, userName);
+				BoardVo vo= new BoardVo(no, title, content, hit, regDate, userName, userNo);
 				bList.add(vo);
 			}
 
@@ -152,8 +153,10 @@ public class BoardDao {
 				int hit= rs.getInt("hit");
 				String regDate= rs.getString("regDate");
 				String userName= rs.getString("username");
+				int userNo= rs.getInt("user_no");
 				
-				vo= new BoardVo(no, title, content, hit, regDate, userName);
+				vo= new BoardVo(no, title, content.replace(" ", "&nbsp;").replace("\n", "<br>")
+						, hit, regDate, userName, userNo);
 			}
 			
 		} catch (SQLException e) {
@@ -165,6 +168,7 @@ public class BoardDao {
 		return vo;
 	}
 	
+	// 게시글 수정
 	public void modify(BoardVo vo) {
 
 		getConnection();
@@ -191,26 +195,54 @@ public class BoardDao {
 		}	
 		close();
 	}
-
+	
+	// 게시글 작성
+	public void write(String title, String content, int userNo) {
+		
+		getConnection();
+	
+		try {
+			String query= "";
+			query += " insert into board ";
+			query += " values(seq_board_no.nextval, ?, ?, 0, sysdate, ?) ";
+		
+		    pstmt= conn.prepareStatement(query);
+		    
+		    pstmt.setString(1, title); // title
+		    pstmt.setString(2, content); // content
+		    pstmt.setInt(3, userNo); // userNo
+	
+		    int count= pstmt.executeUpdate();	    
+		    		   	    
+		    System.out.println("["+count+"건 등록되었습니다.]");
+		        	    
+		} catch (SQLException e) {
+		    System.out.println("error:" + e);
+		} 
+		close();
+	}
+	
+	// 게시글 삭제
+	public void delete(int bno) {
+		getConnection();
+	
+		try {
+			String query= "";
+			query += " delete from board ";
+			query += " where	   no= ? ";
+			
+		    pstmt= conn.prepareStatement(query);
+		    
+		    pstmt.setInt(1, bno);
+		    
+		    int count= pstmt.executeUpdate();
+		    
+		    System.out.println("["+count+"건 삭제되었습니다.]");
+		    
+		} catch (SQLException e) {
+		    System.out.println("error:" + e);
+		}
+		close();
+	}
 }
 
-
-
-
-
-
-/*
-query += " select   no, "; 
-query += "          id, ";
-query += "          password, ";
-query += "          name, ";
-query += "          gender, ";
-query += "          no, ";
-query += "          title, ";
-query += "          content, ";
-query += "          hit, ";
-query += "          to_char(reg_date, 'YYYY-MM-DD HH:MI:SS') regDate, ";
-query += "          user_no ";
-query += " from     users u, board b ";
-query += " where    u.no= b.user_no ";
-query += " order by reg_date desc "; */

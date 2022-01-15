@@ -79,7 +79,7 @@
 								</textarea>
 							</div>
 							
-							<a id="btn_cancel" href="">취소</a>
+							<a id="btn_cancel" href="/mysite/board">취소</a>
 							<input type="hidden" name="action" value="modify">
 							<input type="hidden" name="no" value="${param.no}">
 							<button id="btn_modify" type="submit">수정</button>
