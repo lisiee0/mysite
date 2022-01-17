@@ -224,6 +224,7 @@ public class BoardDao {
 	
 	// 게시글 삭제
 	public void delete(int bno) {
+		
 		getConnection();
 	
 		try {
