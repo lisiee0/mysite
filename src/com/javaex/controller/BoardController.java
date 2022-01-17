@@ -74,6 +74,7 @@ public class BoardController extends HttpServlet {
 			WebUtil.forward(request, response, "/WEB-INF/views/board/writeForm.jsp");
 		}
 		
+		// 글쓰기
 		else if("write".equals(act)) {
 			int userNo= Integer.parseInt(request.getParameter("userNo"));
 			String title= request.getParameter("title");
