@@ -60,7 +60,7 @@ values(seq_board_no.nextval, '두번째 게시글', '두번째', 0, sysdate, 2);
 
 commit;
 
-select * from susers;
+select * from users;
 select * from board;
 
 
